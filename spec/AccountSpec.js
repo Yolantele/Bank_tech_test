@@ -1,48 +1,48 @@
 describe ('Account', function(){
   var account;
+  var account2
 
   beforeEach(function(){
     account = new Account();
+    account2 = new Account(1000);
   });
+
   describe('#initialize', function(){
     it('new account has default balance of 0', function (){
-      expect(account.balance).toEqual(0);
+      expect(account._balance).toEqual(0);
     });
     it('can be set to a new balance upon instantiation', function(){
-      account1 = new Account(40);
-      expect(account1.balance).toEqual(40);
+      expect(account2._balance).toEqual(1000);
     });
-  });
-
-  it('resets transaction status', function(){
-    account.deposit(10);
-    account.resetStatus();
-    resetState = { date: 0, credit: 0, debit: 0, balance: 0 };
-    expect(account.currentStatus).toEqual(resetState);
-  });
-
-  describe('#account operation', function(){
-    it('adds money upon deposit operation', function(){
+    it('resets transaction status', function(){
       account.deposit(10);
-      expect(account.balance).toEqual(10);
+      account.resetStatus();
+      resetState = { date: 0, credit: 0, debit: 0, balance: 0 };
+      expect(account._currentStatus).toEqual(resetState);
     });
-    it('logs balance, debit and time of deposit', function(){
-      account2 = new Account(1000);
-      account2.deposit(500);
-      var accountLog = [{ date: '02/01/2018', credit: 500, debit: 0, balance: 1500 }];
-      expect(account2.log).toEqual(accountLog);
-    });
-    it('deducts money upon deposit operation', function(){
-      account1 = new Account (20);
-      account1.withdraw(10);
-      expect(account1.balance).toEqual(10);
-    });
+  });
 
-    it('logs balance, debit and time of withdrawal', function(){
-      account2 = new Account(1000);
+  describe('#deposit', function(){
+    it('adds to balance', function(){
+      account.deposit(10);
+      expect(account._balance).toEqual(10);
+    });
+    it('snapshots current state data to log', function(){
+      account2.deposit(500);
+      accountLog = [{ date: '02/01/2018', credit: 500, debit: 0, balance: 1500 }];
+      expect(account2._log).toEqual(accountLog);
+    });
+  });
+
+  describe('#withdraw', function(){
+    it('deducts from balance', function(){
+      account2.withdraw(500);
+      expect(account2._balance).toEqual(500);
+    });
+    it('snapshots current state data to log', function(){
       account2.withdraw(500);
       accountLog = [{ date: '02/01/2018', credit:0, debit: 500, balance: 500 }];
-      expect(account2.log).toEqual(accountLog);
+      expect(account2._log).toEqual(accountLog);
     });
   });
 });

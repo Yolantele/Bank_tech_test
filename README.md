@@ -1,10 +1,25 @@
 ## Banking Tech test
 
+User Stories:
+
+```
+As a User
+So that I can store my money safely
+I want open a bank account
+```
+
+```
+As a User
+So that I can comfortably use my funds
+I want to withdraw and deposit safely,
+```
+
 # Features
 - interact with your code via a REPL like IRB or the JavaScript console.
 - Deposits, withdrawal.
 - Account statement (date, amount, balance) printing.
 - Data can be kept in memory (non DB).
+
 
 # Acceptance criteria
 
