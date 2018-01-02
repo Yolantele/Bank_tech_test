@@ -1,16 +1,22 @@
 describe ('bankAccount', function(){
-  var bankAccount;
+  var account;
 
   beforeEach(function(){
-    bankAccount = new BankAccount();
+    account = new BankAccount();
   });
-
-  it('new account has default balance of 0', function (){
-    expect(bankAccount.balance).toEqual(0);
+  describe('#initialize', function(){
+    it('new account has default balance of 0', function (){
+      expect(account.balance).toEqual(0);
+    });
+    it('can be set to a new balance upon instantiation', function(){
+      account1 = new BankAccount(40);
+      expect(account1.balance).toEqual(40);
+    });
   });
-  it('can be set to a new balance upon instantiation', function(){
-    account = new BankAccount(40);
-    expect(account.balance).toEqual(40);
+  describe('#account operation', function(){
+    it('adds money upon deposit operation', function(){
+      account.deposit(10);
+      expect(account.balance).toEqual(10);
+    });
   });
-
 });
