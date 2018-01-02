@@ -1,0 +1,28 @@
+{
+  "name": "bank-tech-test",
+  "version": "1.0.0",
+  "description": "A command-line app for deposits, withdrawal, Account statement and Data keeping",
+  "main": "Banking.js",
+  "directories": {
+    "test": "jasmine-node spec"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yolantele/Bank_tech_test.git"
+  },
+  "author": "Jolanta J",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yolantele/Bank_tech_test/issues"
+  },
+  "homepage": "https://github.com/Yolantele/Bank_tech_test#readme",
+  "devDependencies": {
+    "jasmine": "^2.8.0"
+  },
+  "dependencies": {
+    "request": "^2.83.0"
+  }
+}
