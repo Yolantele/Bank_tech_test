@@ -1,3 +1,4 @@
+'use strict';
 
   function formatDate(date){
     var d = new Date(date),
@@ -25,5 +26,11 @@ Account.prototype = {
     var balance = this.balance;
     var date = formatDate(Date.now());
     this.log.push({date:date, credit:credit, balance:balance});
+  },
+  withdraw: function (debit) {
+    this.balance -= debit;
+    var balance = this.balance;
+    var date = formatDate(Date.now());
+    this.log.push({date:date, debit:debit, balance:balance});
   }
 };
