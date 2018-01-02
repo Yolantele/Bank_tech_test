@@ -1,6 +1,6 @@
 'use strict';
 
-  function formatDate(date){
+  function formated(date){
     var d = new Date(date),
     month = '' + (d.getMonth() + 1),
     day = '' + d.getDate(),
@@ -15,22 +15,33 @@
 function Account(credit){
   this.balance = credit || 0;
   this.log = [];
+  this.currentStatus = { date: 0, credit: 0, debit: 0, balance:0 };
 }
 
 Account.prototype = {
   checkBalance: function(){
     return this.balance;
   },
+  resetStatus: function(){
+    this.currentStatus.date = 0;
+    this.currentStatus.credit = 0;
+    this.currentStatus.debit = 0;
+    this.currentStatus.balance = 0;
+  },
   deposit: function (credit) {
+    this.resetStatus();
     this.balance += credit;
-    var balance = this.balance;
-    var date = formatDate(Date.now());
-    this.log.push({date:date, credit:credit, balance:balance});
+    this.currentStatus.balance = this.balance;
+    this.currentStatus.date = formated(Date.now());
+    this.currentStatus.credit = credit;
+    this.log.push(this.currentStatus)
   },
   withdraw: function (debit) {
+    this.resetStatus();
     this.balance -= debit;
-    var balance = this.balance;
-    var date = formatDate(Date.now());
-    this.log.push({date:date, debit:debit, balance:balance});
+    this.currentStatus.balance = this.balance;
+    this.currentStatus.date = formated(Date.now());
+    this.currentStatus.debit = debit;
+    this.log.push(this.currentStatus);
   }
 };
