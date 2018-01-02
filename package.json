@@ -4,7 +4,7 @@
   "description": "A command-line app for deposits, withdrawal, Account statement and Data keeping",
   "main": "Banking.js",
   "directories": {
-    "test": "jasmine-node spec"
+    "test": ""
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
