@@ -23,6 +23,7 @@ Account.prototype = {
     return this._balance;
   },
   resetStatus: function(){
+    // this._currentStatus.each()
     this._currentStatus.date = 0;
     this._currentStatus.credit = 0;
     this._currentStatus.debit = 0;
@@ -45,3 +46,12 @@ Account.prototype = {
     this._log.push(this._currentStatus);
   }
 };
+
+function Bank (account){
+  this._accounts = [account];
+}
+
+// Bank.prototype = {
+//   operation: function (bankOperation) {
+//     switch()
+// };

@@ -1,10 +1,12 @@
 describe ('Account', function(){
   var account;
-  var account2
+  var account2;
+  var CURRENT_DATE = '03/01/2018';
 
   beforeEach(function(){
     account = new Account();
     account2 = new Account(1000);
+
   });
 
   describe('#initialize', function(){
@@ -29,7 +31,7 @@ describe ('Account', function(){
     });
     it('snapshots current state data to log', function(){
       account2.deposit(500);
-      accountLog = [{ date: '02/01/2018', credit: 500, debit: 0, balance: 1500 }];
+      accountLog = [{ date: CURRENT_DATE, credit: 500, debit: 0, balance: 1500 }];
       expect(account2._log).toEqual(accountLog);
     });
   });
@@ -41,8 +43,28 @@ describe ('Account', function(){
     });
     it('snapshots current state data to log', function(){
       account2.withdraw(500);
-      accountLog = [{ date: '02/01/2018', credit:0, debit: 500, balance: 500 }];
+      accountLog = [{ date: CURRENT_DATE, credit:0, debit: 500, balance: 500 }];
       expect(account2._log).toEqual(accountLog);
+    });
+  });
+});
+
+
+
+// _____  BANK SPEC ______
+
+
+describe ('Bank', function(){
+  var bank;
+  var CURRENT_DATE = '03/01/2018';
+
+  beforeEach(function(){
+    bank = new Bank();
+  });
+
+  describe('#initialize', function(){
+    it('has an empty list of accounts', function (){
+      expect(bank._accounts).toEqual( [] );
     });
   });
 });
