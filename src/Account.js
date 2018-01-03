@@ -2,7 +2,6 @@
 
 // _____  ACCOUNT OBJECT  ______
 
-
 function Account(credit){
   this._name = '';
   this._balance = credit || 0;
@@ -17,9 +16,6 @@ Account.prototype = {
     var name = `account${counter}`;
     this._name = name;
   },
-  checkBalance: function(){
-    return this._balance;
-  },
   resetStatus: function(){
     this._currentStatus = { date: 0, credit: 0, debit: 0 };
   },
@@ -33,35 +29,42 @@ Account.prototype = {
     this._currentStatus.date = `${day}/${month}/${year}`;
   },
   deposit: function (funds) {
-    this.resetStatus();
     this._balance += funds;
     this._currentStatus.credit = funds;
-    this.logTime();
-    this._log.push(this._currentStatus);
   },
   withdraw: function (funds) {
-    this.resetStatus();
     this._balance -= funds;
-
-    this.logTime();
     this._currentStatus.debit = funds;
-    this._log.push(this._currentStatus);
+  },
+  logTransaction: function() {
+    this.logTime();
+    var logEntry = this._currentStatus;
+    logEntry.balance = this._balance;
+    this._log.push(logEntry);
+  },
+  transaction: function(transaction, funds) {
+    this.resetStatus();
+    switch(transaction) {
+      case 'deposit':
+        this.deposit(funds);
+        break;
+      case 'withdraw':
+        this.withdraw(funds);
+        break;
+    }
+    this.logTransaction();
   }
 };
 
 
 // _____  BANK OBJECT  ______
 
-
 function Bank (){
   this._accounts = [];
-
 }
 
 Bank.prototype = {
-
   openAccount: function (){
-
   },
   operation: function (bankOperation, account) {
      switch(bankOperation) {

@@ -29,11 +29,6 @@ describe ('Account', function(){
       account.deposit(10);
       expect(account._balance).toEqual(10);
     });
-    it('snapshots current state data to log', function(){
-      account2.deposit(500);
-      accountLog = [{ date: CURRENT_DATE, credit: 500, debit: 0 }];
-      expect(account2._log).toEqual(accountLog);
-    });
   });
 
   describe('#withdraw', function(){
@@ -41,9 +36,24 @@ describe ('Account', function(){
       account2.withdraw(500);
       expect(account2._balance).toEqual(500);
     });
-    it('snapshots current state data to log', function(){
-      account2.withdraw(500);
-      accountLog = [{ date: CURRENT_DATE, credit:0, debit: 500 }];
+    // it('prevents debit if no balance or insufficient funds', function(){
+    //   account.withdraw(1100);
+    //   account2.withdraw(1100);
+    //   var account3 = new Account(1100);
+    //   expect( function(){ account.withdraw(1100); }.toThrow('No Balance Allowance'));
+    //   expect( function(){ account2.withdraw(1100); }.toThrow('Insuficcient Balance Allowance'));
+    //   expect( account3._balance).toEqual(0);
+    // });
+  });
+  describe('#transaction', function(){
+    it("logs current state data when 'deposit'", function(){
+      account2.transaction('deposit', 500);
+      accountLog = [{ date: CURRENT_DATE, credit: 500, debit: 0, balance: 1500 }];
+      expect(account2._log).toEqual(accountLog);
+    });
+    it("logs current state data when 'withdraw'", function(){
+      account2.transaction('withdraw', 500);
+      accountLog = [{ date: CURRENT_DATE, credit:0, debit: 500, balance: 500 }];
       expect(account2._log).toEqual(accountLog);
     });
   });
