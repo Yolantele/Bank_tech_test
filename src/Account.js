@@ -58,25 +58,15 @@ Account.prototype = {
 
 function Bank (){
   this._accounts = [];
-  this._tracker = 0
+  this._tracker = 0;
 }
 
 Bank.prototype = {
-  assignedName: function(){
+  trackNumber: function(){
     this._tracker += 1;
-    var counter = this._tracker;
-    var name = `account${counter}`;
-    return name;
   },
-  openAccount: function (account){
-    var name = this.assignedName();
-    this._accounts.push([ name, account ]);
+  openAccount: function (){
+    this.trackNumber();
+    this._accounts.push(new Account());
   },
-  // operation: function (bankOperation, account) {
-  //    switch(bankOperation) {
-  //     case 'Add Account':
-  //       this._accounts.push(account);
-  //       break;
-  //   }
-  // }
 };

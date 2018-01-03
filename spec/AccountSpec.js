@@ -81,18 +81,12 @@ describe ('Bank', function(){
 
   describe('#openAccount', function(){
     it('stores a new created account with a unique name', function(){
-      bank.openAccount('mockAccount');
-      bank.openAccount('mockAccount2');
-      expect(bank._accounts).toEqual([ ['account1', 'mockAccount'], ['account2', 'mockAccount2'] ]);
+      bank.openAccount();
+      bank.openAccount();
+      expect(bank._accounts.length).toEqual(2);
     });
   });
 
-  describe('#operation', function(){
-    // it("adds new account when 'create account' is chosen", function(){
-    //   bank.operation('Add Account', bankAccount);
-    //   expect(bank._accounts.length).toEqual(1);
-    // });
-  });
 });
 
 // ______ TEMPLATES _____
