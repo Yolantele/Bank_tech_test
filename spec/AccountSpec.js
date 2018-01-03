@@ -53,6 +53,13 @@ describe ('Account', function(){
       expect(account2._log).toEqual(accountLog);
     });
   });
+  describe('#renderStatement', function(){
+    it('returns the entire statement', function(){
+      account.transaction('deposit', 500);
+      output = '03/01/2018 || 500 || 0 || 500';
+      expect(account.renderStatement()).toEqual([output]);
+    });
+  });
 });
 
 
