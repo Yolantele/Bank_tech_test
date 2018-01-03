@@ -3,29 +3,22 @@
 // _____  ACCOUNT OBJECT  ______
 
 function Account(credit){
-  this._name = '';
   this._balance = credit || 0;
   this._log = [];
   this._currentStatus = { date: 0, credit: 0, debit: 0 };
 }
 
 Account.prototype = {
-  assignName: function(){
-    var counter = 0;
-    counter += 1;
-    var name = `account${counter}`;
-    this._name = name;
-  },
   resetStatus: function(){
     this._currentStatus = { date: 0, credit: 0, debit: 0 };
   },
   logTime: function () {
     var date = new Date(Date.now()),
-    month = '' + (date.getMonth() + 1),
     day = '' + date.getDate(),
+    month = '' + (date.getMonth() + 1),
     year = date.getFullYear();
-    if (month.length < 2) month = '0' + month ;
     if (day.length < 2) day = '0' + day ;
+    if (month.length < 2) month = '0' + month ;
     this._currentStatus.date = `${day}/${month}/${year}`;
   },
   deposit: function (funds) {
@@ -65,16 +58,25 @@ Account.prototype = {
 
 function Bank (){
   this._accounts = [];
+  this._tracker = 0
 }
 
 Bank.prototype = {
-  openAccount: function (){
+  assignedName: function(){
+    this._tracker += 1;
+    var counter = this._tracker;
+    var name = `account${counter}`;
+    return name;
   },
-  operation: function (bankOperation, account) {
-     switch(bankOperation) {
-      case 'Add Account':
-        this._accounts.push(account);
-        break;
-    }
-  }
+  openAccount: function (account){
+    var name = this.assignedName();
+    this._accounts.push([ name, account ]);
+  },
+  // operation: function (bankOperation, account) {
+  //    switch(bankOperation) {
+  //     case 'Add Account':
+  //       this._accounts.push(account);
+  //       break;
+  //   }
+  // }
 };
