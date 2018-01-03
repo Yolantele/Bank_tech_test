@@ -1,5 +1,7 @@
 'use strict';
 
+// _____  FORMATER  ______
+
 function formated(date){
   var d = new Date(date),
   month = '' + (d.getMonth() + 1),
@@ -12,13 +14,22 @@ function formated(date){
   return [day, month, year].join('/');
 }
 
+// _____  ACCOUNT OBJECT  ______
+
+
 function Account(credit){
   this._balance = credit || 0;
   this._log = [];
-  this._currentStatus = { date: 0, credit: 0, debit: 0, balance:0 };
+  this._currentStatus = { name: '', date: 0, credit: 0, debit: 0, balance:0 };
 }
 
 Account.prototype = {
+  assignName: function(){
+    var counter = 0;
+    counter += 1;
+    var name = `account${counter}`;
+    this._currentStatus.name = name;
+  },
   checkBalance: function(){
     return this._balance;
   },
@@ -28,30 +39,52 @@ Account.prototype = {
     this._currentStatus.credit = 0;
     this._currentStatus.debit = 0;
     this._currentStatus.balance = 0;
+    this._currentStatus.name = '';
   },
-  deposit: function (credit) {
+  deposit: function (funds) {
     this.resetStatus();
-    this._balance += credit;
+    this._balance += funds;
     this._currentStatus.balance = this._balance;
     this._currentStatus.date = formated(Date.now());
-    this._currentStatus.credit = credit;
+    this._currentStatus.credit = funds;
     this._log.push(this._currentStatus);
   },
-  withdraw: function (debit) {
+  withdraw: function (funds) {
     this.resetStatus();
-    this._balance -= debit;
+    this._balance -= funds;
     this._currentStatus.balance = this._balance;
     this._currentStatus.date = formated(Date.now());
-    this._currentStatus.debit = debit;
+    this._currentStatus.debit = funds;
     this._log.push(this._currentStatus);
   }
+  // transaction: function (operation, funds) {
+  //   switch(operation){
+  //     case 'deposit' :
+  //       deposit(funds);
+  //
+  //   }
+  // }
 };
 
-function Bank (account){
-  this._accounts = [account];
+
+// _____  BANK OBJECT  ______
+
+
+function Bank (){
+  this._accounts = [];
 }
 
-// Bank.prototype = {
-//   operation: function (bankOperation) {
-//     switch()
-// };
+Bank.prototype = {
+
+  operation: function (bankOperation, account) {
+     switch(bankOperation) {
+      case 'Add Account':
+        this._accounts.push(account);
+        break;
+      // case 'Status Update':
+      //
+      //   if account.
+
+    };
+  }
+};
