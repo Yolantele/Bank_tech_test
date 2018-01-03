@@ -33,8 +33,12 @@ Account.prototype = {
     this._currentStatus.credit = funds;
   },
   withdraw: function (funds) {
-    this._balance -= funds;
-    this._currentStatus.debit = funds;
+    if (this._balance < funds){
+      throw ('Insuficcient Balance Allowance');
+    } else {
+      this._balance -= funds;
+      this._currentStatus.debit = funds;
+    }
   },
   logTransaction: function() {
     this.logTime();

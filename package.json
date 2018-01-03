@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/Yolantele/Bank_tech_test#readme",
   "devDependencies": {
-    "jasmine": "^2.8.0"
+    "jasmine": "^2.8.0",
+    "jasmine-console-reporter": "^2.0.1"
   },
   "dependencies": {
     "request": "^2.83.0"

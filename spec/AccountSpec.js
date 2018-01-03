@@ -1,3 +1,4 @@
+
 describe ('Account', function(){
   var account;
   var account2;
@@ -36,14 +37,9 @@ describe ('Account', function(){
       account2.withdraw(500);
       expect(account2._balance).toEqual(500);
     });
-    // it('prevents debit if no balance or insufficient funds', function(){
-    //   account.withdraw(1100);
-    //   account2.withdraw(1100);
-    //   var account3 = new Account(1100);
-    //   expect( function(){ account.withdraw(1100); }.toThrow('No Balance Allowance'));
-    //   expect( function(){ account2.withdraw(1100); }.toThrow('Insuficcient Balance Allowance'));
-    //   expect( account3._balance).toEqual(0);
-    // });
+    it('prevents debit if insufficient funds', function(){
+      expect( function(){ account.withdraw(1100); }).toThrow('Insuficcient Balance Allowance');
+    });
   });
   describe('#transaction', function(){
     it("logs current state data when 'deposit'", function(){
