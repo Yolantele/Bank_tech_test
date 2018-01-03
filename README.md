@@ -54,3 +54,13 @@ date || credit || debit || balance
 10/01/2012 || 1000.00 || || 1000.00
 
 ```
+
+## To run application tests
+
+clone this repository.
+then run these commands to set up the dependencies:
+
+```
+npm install
+open SpecRunner.html
+```
