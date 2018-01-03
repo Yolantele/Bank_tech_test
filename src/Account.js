@@ -50,8 +50,15 @@ Account.prototype = {
         break;
     }
     this.logTransaction();
+  },
+  renderStatement: function (){
+
+    var logLine =  `date || credit || debit || balance \n
+    ${this._log[0].date} || ${this._log[0].credit} || ${this._log[0].debit} || ${this._log[0].balance} `;
+    return logLine;
   }
 };
+
 
 
 // _____  BANK OBJECT  ______
@@ -69,4 +76,5 @@ Bank.prototype = {
     this.trackNumber();
     this._accounts.push(new Account());
   },
+  // accessAccount(account)
 };
