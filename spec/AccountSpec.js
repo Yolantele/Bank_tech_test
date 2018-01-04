@@ -2,7 +2,6 @@
 describe ('Account', function(){
   var account;
   var account2;
-  var CURRENT_DATE = '04/01/2018';
 
   beforeEach(function(){
     account = new Account();
@@ -41,26 +40,40 @@ describe ('Account', function(){
       expect( function(){ account.withdraw(1100); }).toThrow('Insuficcient Balance Allowance');
     });
   });
+
   describe('#transaction', function(){
     it("logs current state data when 'deposit'", function(){
-      account2.transaction('deposit', 500);
-      accountLog = [{ date: CURRENT_DATE, credit: 500, debit: 0, balance: 1500 }];
+      account2.transaction('deposit', 500, '14/01/2012');
+      accountLog = [{ date: '14/01/2012', credit: 500, debit: 0, balance: 1500 }];
       expect(account2._log).toEqual(accountLog);
     });
     it("logs current state data when 'withdraw'", function(){
-      account2.transaction('withdraw', 500);
-      accountLog = [{ date: CURRENT_DATE, credit:0, debit: 500, balance: 500 }];
+      account2.transaction('withdraw', 500, '14/01/2012');
+      accountLog = [{ date: '14/01/2012', credit:0, debit: 500, balance: 500 }];
       expect(account2._log).toEqual(accountLog);
     });
   });
-  describe('#renderStatement', function(){
-    it('returns the entire statement', function(){
-      account.transaction('deposit', 500);
-      output = ` date || credit || debit || balance \n  ${CURRENT_DATE} || 500 || 0 || 500 \n`;
-      expect(account.renderStatement()).toEqual(output);
+});
+
+
+
+
+// _____  RENDERER SPEC ______
+
+describe ('Renderer', function(){
+  var renderer;
+
+  beforeEach(function(){
+    renderer = new Renderer();
+  });
+
+  describe('#initialize', function(){
+    it('stores empty list of log lines', function(){
+      expect(renderer._logLines).toEqual([]);
     });
   });
 });
+
 
 
 
@@ -71,7 +84,6 @@ describe ('Bank', function(){
   var bank;
   var mockAccount;
 
-  var CURRENT_DATE = '03/01/2018';
 
   beforeEach(function(){
      bank = new Bank();
@@ -95,12 +107,3 @@ describe ('Bank', function(){
   });
 
 });
-
-// ______ TEMPLATES _____
-
-
-  // describe('', function(){
-  //   it('', function(){
-  //
-  //   });
-  // });

@@ -12,14 +12,18 @@ Account.prototype = {
   resetStatus: function(){
     this._currentStatus = { date: 0, credit: 0, debit: 0 };
   },
-  logTime: function () {
-    var date = new Date(Date.now()),
-    day = '' + date.getDate(),
-    month = '' + (date.getMonth() + 1),
-    year = date.getFullYear();
-    if (day.length < 2) day = '0' + day ;
-    if (month.length < 2) month = '0' + month ;
-    this._currentStatus.date = `${day}/${month}/${year}`;
+  logTime: function (chosenDate) {
+    if(chosenDate){
+      this._currentStatus.date = chosenDate;
+    } else {
+      var date = new Date(Date.now()),
+      day   = '' + date.getDate(),
+      month = '' + (date.getMonth() + 1),
+      year  = date.getFullYear();
+      if (day.length < 2) day = '0' + day ;
+      if (month.length < 2) month = '0' + month ;
+      this._currentStatus.date = `${day}/${month}/${year}`;
+    }
   },
   deposit: function (funds) {
     this._balance += funds;
@@ -33,13 +37,13 @@ Account.prototype = {
       this._currentStatus.debit = funds;
     }
   },
-  logTransaction: function() {
-    this.logTime();
+  logTransaction: function(chosenDate) {
+    this.logTime(chosenDate);
     var logEntry = this._currentStatus;
     logEntry.balance = this._balance;
     this._log.push(logEntry);
   },
-  transaction: function(transaction, funds) {
+  transaction: function(transaction, funds, chosenDate) {
     this.resetStatus();
     switch(transaction) {
       case 'deposit':
@@ -49,18 +53,24 @@ Account.prototype = {
         this.withdraw(funds);
         break;
     }
-    this.logTransaction();
-  },
-  renderStatement: function (){
-    var headline = ' date || credit || debit || balance \n ';
-    var logLine = [];
-    this._log.forEach(function(log){
-      var line = ` ${log.date} || ${log.credit} || ${log.debit} || ${log.balance} \n`;
-      logLine.push(line);
-    });
-    var status = logLine.join('\n');
-    return headline + status;
+    this.logTransaction(chosenDate);
   }
+};
+
+
+
+// _____  RENDERER OBJECT  ______
+
+function Renderer () {
+  this._logLines = [];
+  // this._output = [];
+}
+
+Renderer.prototype = {
+  headline: function(){
+    var headline = ' date || credit || debit || balance \n ';
+    return headline;
+  },
 };
 
 
@@ -80,5 +90,4 @@ Bank.prototype = {
     this.trackNumber();
     this._accounts.push(new Account());
   },
-  // accessAccount(account)
 };
