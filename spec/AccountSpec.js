@@ -2,7 +2,7 @@
 describe ('Account', function(){
   var account;
   var account2;
-  var CURRENT_DATE = '03/01/2018';
+  var CURRENT_DATE = '04/01/2018';
 
   beforeEach(function(){
     account = new Account();
@@ -56,8 +56,8 @@ describe ('Account', function(){
   describe('#renderStatement', function(){
     it('returns the entire statement', function(){
       account.transaction('deposit', 500);
-      output = '03/01/2018 || 500 || 0 || 500';
-      expect(account.renderStatement()).toEqual([output]);
+      output = ` date || credit || debit || balance \n  ${CURRENT_DATE} || 500 || 0 || 500 \n`;
+      expect(account.renderStatement()).toEqual(output);
     });
   });
 });

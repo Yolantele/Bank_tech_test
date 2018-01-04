@@ -52,14 +52,17 @@ Account.prototype = {
     this.logTransaction();
   },
   renderStatement: function (){
-    var headline = 'date || credit || debit || balance';
+    var headline = ' date || credit || debit || balance \n ';
     var logLine = [];
     this._log.forEach(function(log){
-      logLine.push(`${log.date} || ${log.credit} || ${log.debit} || ${log.balance} \n`);
+      var line = ` ${log.date} || ${log.credit} || ${log.debit} || ${log.balance} \n`;
+      logLine.push(line);
     });
-    return logLine;
+    var status = logLine.join('\n');
+    return headline + status;
   }
 };
+
 
 
 // _____  BANK OBJECT  ______
