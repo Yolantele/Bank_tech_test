@@ -1,5 +1,7 @@
 'use strict';
 
+// Account, Renderer and Bank factories:
+
 // _____  ACCOUNT OBJECT  ______
 
 function Account(credit){
@@ -58,12 +60,10 @@ Account.prototype = {
 };
 
 
-
 // _____  RENDERER OBJECT  ______
 
 function Renderer () {
   this._logLines = [];
-  // this._output = [];
 }
 
 Renderer.prototype = {
@@ -104,5 +104,5 @@ Bank.prototype = {
   openAccount: function (){
     this.trackNumber();
     this._accounts.push(new Account());
-  },
+  }
 };

@@ -78,17 +78,14 @@ describe ('Renderer', function(){
     it('converts hash data structure to log lines', function (){
       var logData = [ { date: '14/01/2012', credit: 500, debit: 0, balance: 500 } ];
       renderer.convertData(logData);
-      logged = '14/01/2012 || 500 || n/a || 500\n'
+      logged = '14/01/2012 || 500 || n/a || 500\n';
       expect(renderer._logLines).toEqual([logged]);
     });
   });
 });
 
 
-
-
 // _____  BANK SPEC ______
-
 
 
 describe ('Bank', function(){
@@ -116,5 +113,4 @@ describe ('Bank', function(){
       expect(bank._accounts.length).toEqual(2);
     });
   });
-
 });
