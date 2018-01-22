@@ -1,11 +1,11 @@
-## Banking Tech test
+## Banking Tech Test
 
 User Stories:
 
 ```
 As a User
 So that I can store my money safely
-I want open a bank account
+I want to open a bank account
 ```
 
 ```
@@ -32,14 +32,15 @@ So that I can keep track of accounts system
 I want to store accounts data.
 ```
 
-# Features
+# Key Features
+
 - interact with your code via a REPL like IRB or the JavaScript console.
-- Deposits, withdrawal.
+- Transactions: Deposits, withdrawal.
 - Account statement (date, amount, balance) printing.
 - Data can be kept in memory (non DB).
 
 
-##Acceptance criteria
+## Acceptance criteria
 
 Given a client makes a deposit of 1000 on 10-01-2012
 And a deposit of 2000 on 13-01-2012
@@ -55,28 +56,27 @@ date || credit || debit || balance
 
 ```
 
-## To run application tests
+## Solution Design to problem:
+ To drive well crafter OOD, I took a test-driven approach, and looked into extracting multiple small classes/object factories withing the bank operations: Bank class, Bank Statement/renderer class, Account class. A further transaction class could be extracted (please see extension/improvement suggestions bellow).
+
+## How the code is structured 
+Account class - responsible for tracking status of the account - current balance and transactions history. As well as executing a time-stamped transaction. 
+Renderer class - responsible for translating account data to readable format , ready for User. 
+Bank class - responsible for storing multiple accounts , trancking the volume of existing accounts. 
+
+## Extensions and major improvement suggestions
+After taking the route of account and rendered classes, I see a strong possibility for redesigning the key objects: mainly that a further transaction class could be extracted. This would help with  time-stamping each transaction and removing this responsibility from Account class. Account class would then hold the log of all transactions and current status of the account. logTime function would become timeStamp fucntion inside transaction class. 
+
+## To run application/tests
 
 clone this repository.
-then run these commands to set up the dependencies:
-
+to set up the dependencies, run the commands in terminal:
+```
+cd bank-tech-test
+```
 ```
 npm install
+```
+```
 open SpecRunner.html
 ```
-
-Describe how you approached designing your solution to the problem.
-
- Describe how you structured your code. Why did you do it this way?
-
- Describe how to install and run your code and tests.
-
- Describe the dependencies your code has. What trade-offs did you make when deciding what dependencies to use?
-
- If you've deployed the app, include a link to it.
-
- Include screenshots of your running app.
-
- Try very hard to complete all the tasks in the tech test. If you run out of time, outline how you would have approached the sections you didn't get to.
-
- Describe the extensions you would add if you had more time.
